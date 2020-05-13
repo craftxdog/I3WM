@@ -1,0 +1,244 @@
+#
+# Appearance
+#
+set $base00 #272822
+set $base01 #393939
+set $base02 #515151
+set $base03 #747369
+set $base04 #a09f93
+set $base05 #d3d0c8
+set $base06 #e8e6df
+set $base07 #f2f0ec
+set $base08 #f2777a
+set $base09 #f99157
+set $base0A #ffcc66
+set $base0B #99cc99
+set $base0C #66cccc
+set $base0D #6699cc
+set $base0E #cc99cc
+set $base0F #d27b53
+
+##### i3-gaps ##############
+for_window [class=".*"] border pixel 1
+gaps inner 5
+gaps outer 1
+#gaps horizontal 2
+
+################## i3-radius #######################
+border_radius 2
+hide_edge_borders both
+ #smart_gaps on
+smart_borders on
+
+set $mod Mod4
+floating_modifier $mod
+
+#
+#Keyboard shortcuts
+#
+
+bindsym 	XF86MonBrightnessUp 	exec xbacklight -inc 10
+bindsym 	XF86MonBrightnessDown 	exec xbacklight -dec 10
+
+#change volume
+bindsym     XF86AudioRaiseVolume    exec pactl set-sink-volume 0 +5%    # increase sound volume
+bindsym     XF86AudioLowerVolume    exec pactl set-sink-volume 0 -5%    # decrease sound volume
+bindsym     XF86AudioMute           exec pactl set-sink-mute 0 toggle   # mute sound
+bindsym     XF86AudioPlay           exec mpc toggle
+bindsym     XF86AudioPrev           exec mpc prev
+bindsym     XF86AudioNext           exec mpc next
+
+
+bindsym     $mod+q                  kill
+bindsym     $mod+Return             exec alacritty
+bindsym     $mod+d                  exec rofi -show run -lines 10
+bindsym     Print                   exec flameshot full -p ~/Imágenes/screenshots -d 1000
+bindsym     $mod+Print              exec flameshot gui -p ~/Imágenes/screenshots
+bindsym     $mod+Insert             exec xclip -o | xclip -selection clipboard                # move primary buffer to clipboard
+bindsym     $mod+Shift+c            reload
+bindsym     $mod+Shift+r            restart
+bindsym     $mod+Shift+e            exec ~/.config/scripts/rofi-power.sh
+bindsym     $mod+Ctrl+l             exec i3lock-fancy -g
+
+# change focus
+bindsym     $mod+h                  focus left
+bindsym     $mod+j                  focus down
+bindsym     $mod+k                  focus up
+bindsym     $mod+l                  focus right
+
+# alternatively, you can use the cursor keys:
+bindsym     $mod+Left               focus left
+bindsym     $mod+Down               focus down
+bindsym     $mod+Up                 focus up
+bindsym     $mod+Right              focus right
+
+# move focused windowmartas@justreadtheinstructions ~
+bindsym     $mod+Shift+j            move left
+bindsym     $mod+Shift+k            move down
+bindsym     $mod+Shift+l            move up
+bindsym     $mod+Shift+semicolon    move right
+
+# alternatively, you can use the cursor keys:
+bindsym     $mod+Shift+Left         move left
+bindsym     $mod+Shift+Down         move down
+bindsym     $mod+Shift+Up           move up
+bindsym     $mod+Shift+Right        move right
+
+# Vim like splitting
+bindsym     $mod+s                  split h
+bindsym     $mod+v                  split v
+bindsym     $mod+f                  fullscreen toggle
+
+bindsym     $mod+w                  layout stacking
+bindsym     $mod+t                  layout tabbed
+bindsym     $mod+e                  layout toggle split
+bindsym     $mod+Shift+space        floating toggle
+
+# change focus between tiling / floating windows
+bindsym     $mod+space              focus mode_toggle
+
+# focus the parent container
+bindsym     $mod+a                  focus parent
+
+
+set $ws1 
+set $ws2 
+set $ws3 
+set $ws4 
+set $ws5 
+set $ws6 
+set $ws7 
+set $ws8 
+set $ws9 
+set $ws10 
+
+# switch to workspace
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+bindsym $mod+9 workspace $ws9
+bindsym $mod+0 workspace $ws10
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6
+bindsym $mod+Shift+7 move container to workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8
+bindsym $mod+Shift+9 move container to workspace $ws9
+bindsym $mod+Shift+0 move container to workspace $ws10
+
+# Assing Workspaces
+
+bindsym     $mod+r          mode "resize"
+
+mode "resize" {
+    bindsym h           resize grow     width  10 px or 10 ppt
+    bindsym j           resize shrink   height 10 px or 10 ppt
+    bindsym k           resize grow     height 10 px or 10 ppt
+    bindsym l           resize shrink   width  10 px or 10 ppt
+
+    bindsym Left        resize grow     width  10 px or 10 ppt
+    bindsym Down        resize shrink   height 10 px or 10 ppt
+    bindsym Up          resize grow     height 10 px or 10 ppt
+    bindsym Right       resize shrink   width  10 px or 10 ppt
+
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+#
+# Status bar
+#
+
+font xft:Source Code Pro Medium 10
+
+#Start Apps
+exec --no-startup-id xss-lock i3lock-fancy
+exec --no-startup-id pulseaudio --start
+exec_always nm-applet
+exec_always compton -f
+exec_always feh --bg-scale /home/Caronte-/Imágenes/Wallpapers/Wallpaper-4-Winter.png
+exec_always conky -c /home/Caronte-/.config/conky/conky.conf
+exec_always setxkbmap -layout es
+
+# Notifications
+exec_always --no-startup-id dunst -config ~/.config/i3/config_dunst
+
+# Restart polybar
+bindsym $mod+Shift+p exec --no-startup-id "killall polybar"
+bindsym $mod+Ctrl+p exec --no-startup-id "polybar top"
+#
+# # Ask for battery remaining time
+bindsym $mod+Shift+b exec "/home/Caronte-/.config/scripts/bat.sh"
+#
+# Empty the trash
+bindsym $mod+Shift+BackSpace exec "/home/Caronte-/.config/scripts/emptytrash.sh"
+#
+# Update the system
+bindsym $mod+Shift+u exec "alacritty -e sudo dnf -update"
+
+         bar {
+                colors
+                     {
+                 background #2f343f
+                         statusline #2f343f
+                         separator #4b5262
+
+             # colour of border, background, and text
+                         focused_workspace       #2f343f #bf616a #d8dee8
+                         active_workspace        #2f343f #2f343f #d8dee8
+                         inactive_workspace      #2f343f #2f343f #d8dee8
+                         urgent_workspace        #2f343f #ebcb8b #2f343f
+                     }
+              status_command ~/.config/bumblebee-status/bumblebee-status \
+              -t gruvbox-powerline \
+              -m cmus bluetooth pulseaudio xrandr dunst layout github datetime -p interval=8 github.token=fcd6a022fb0ea6fe9ad3ef4cabc33452539817ba date.left-click="gsimplecal"
+#        font pango:Ubuntu-C 10, FontAwesome 10
+	       tray_output primary
+               tray_padding 0
+  #      status_command py3status -c /home/Caronte-/.config/i3status/i3status.conf
+ #       i3bar_command i3bar -t
+               position top
+        separator_symbol ""
+        strip_workspace_numbers yes
+	}
+
+
+
+# colour of border, background, text, indicator, and child_border
+client.focused              #bf616a #2f343f #d8dee8 #bf616a #d8dee8
+client.focused_inactive     #2f343f #2f343f #d8dee8 #2f343f #2f343f
+client.unfocused            #2f343f #2f343f #d8dee8 #2f343f #2f343f
+client.urgent               #2f343f #2f343f #d8dee8 #2f343f #2f343f
+client.placeholder          #2f343f #2f343f #d8dee8 #2f343f #2f343f
+client.background           #2f343f
+
+#
+# App windows settings
+#
+
+bindsym $mod+c exec code
+bindsym $mod+x exec "alacritty -e cmus"
+bindsym $mod+z exec "alacritty -e vifm"
+bindsym $mod+b exec brave-browser
+bindsym $mod+p exec pcmanfm
+bindsym $mod+n exec /home/Caronte-/Descargas/netbeans/bin/netbeans
+
+for_window [class="vlc"]                fullscreen enable
+for_window [class="mpv"]                fullscreen enable
+for_window [class="Zathura"]            fullscreen enable
+for_window [class="Pavucontrol"]        floating enable
+
+#
+# Run following scipt on start
+#
+exec --no-startup-id ~/.config/scripts/autostart.sh

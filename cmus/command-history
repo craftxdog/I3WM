@@ -1,0 +1,25 @@
+cd Música/
+add Música/
+clear 
+clear
+add Música/PhilipSayce/
+R
+add /home/Caronte-/Música/PhilipSayce/
+%f
+set altformat_title=%f
+set dsp.ao.wav_dir=/home/Caronte-
+add
+colorscheme dracula
+colorscheme name_of_theme
+add Música/ListaCompleta.pls
+y
+save Música/ListaCompleta.pls
+save Música/Philip_Sayce/
+save Música/
+save Música/Philip_Sayce
+'y'
+s
+add /home/Caronte-/Música/Philip_Sayce/
+add 
+add /home/Caronte-/Música/
+q
