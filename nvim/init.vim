@@ -28,6 +28,9 @@ set go=a
 set mouse=a
 set nohlsearch
 set clipboard+=unnamedplus
+" Persist undo history between file editing sessions.
+set undofile
+set undodir=~/.vim/undodir
 
 " Some basics:
 	nnoremap c "_c
